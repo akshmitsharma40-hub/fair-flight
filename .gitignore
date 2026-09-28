@@ -45,5 +45,7 @@ DECISIONS.weighflow.md
 # --- builds & deps ---
 node_modules/
 frontend/dist/
+frontend/tsconfig.tsbuildinfo
+*.tsbuildinfo
 *.log
 *.log.err
