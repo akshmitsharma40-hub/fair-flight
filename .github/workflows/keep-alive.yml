@@ -1,0 +1,45 @@
+# Keep-alive pinger — prevents the free-tier Render backend from sleeping.
+#
+# Render free web services sleep after ~15 min without inbound traffic; this
+# workflow curls /health every 10 minutes so the API stays warm 24/7.
+# (Public repo ⇒ GitHub Actions minutes are free. One always-on service fits
+# inside Render's 750 free instance-hours/month.)
+#
+# Any HTTP response — even a 503 while booting — counts as traffic and wakes
+# the service, so only network-level failure counts as a failed ping.
+
+name: keep-alive
+
+on:
+  schedule:
+    - cron: "*/10 * * * *" # every 10 minutes (UTC)
+  workflow_dispatch: {} # manual trigger from the Actions tab
+
+concurrency:
+  group: keep-alive
+  cancel-in-progress: false
+
+permissions: {} # job only makes outbound HTTPS calls; no repo access
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Ping API /health
+        run: |
+          URL="https://fair-flight-api.onrender.com/health"
+          ok=0
+          for i in 1 2 3; do
+            code=$(curl -s -o /tmp/health.json -w "%{http_code}" --max-time 25 "$URL" || echo 000)
+            echo "attempt $i → HTTP $code"
+            if [ "$code" != "000" ]; then ok=1; break; fi
+            sleep 5
+          done
+          cat /tmp/health.json 2>/dev/null || true
+          if [ "$ok" = "1" ]; then
+            echo "✅ API responded — keep-alive done"
+          else
+            echo "❌ API unreachable after 3 attempts (network or Render outage)"
+            exit 1
+          fi
