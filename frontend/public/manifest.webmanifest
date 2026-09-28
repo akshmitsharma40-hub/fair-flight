@@ -1,0 +1,17 @@
+{
+  "name": "FAIR FLIGHT · National Airfare Price Index",
+  "short_name": "FAIR FLIGHT",
+  "description": "Real-time Laspeyres airfare price index for India — CPI augmentation under COICOP-2018 Division 07 (Base Year 2024=100).",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05060f",
+  "theme_color": "#05060f",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

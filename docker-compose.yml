@@ -1,0 +1,33 @@
+# APIx dashboard stack — one-command demo:
+#   docker compose up --build
+#   frontend → http://localhost:5173   backend → http://localhost:8000/docs
+
+services:
+  backend:
+    build:
+      context: ./backend
+    image: apix-backend:latest
+    container_name: apix-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - WEBHOOK_SECRET=${WEBHOOK_SECRET:-apix-demo-signing-key}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE: ""
+    image: apix-frontend:latest
+    container_name: apix-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"

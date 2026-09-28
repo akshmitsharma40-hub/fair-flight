@@ -1,0 +1,556 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   APIx design tokens — dual-theme system driven by html[data-theme].
+   Dark: deep-space navy with an animated aurora field.
+   Light: soft institutional "RBI portal" paper look with pastel aurora.
+   Accent variables are consumed by the charts (live-computed) and by the
+   palette-reactive glow utilities below.
+   ========================================================================== */
+@theme {
+  --font-display: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  color-scheme: dark;
+}
+
+/* ------------------------------- DARK THEME ------------------------------ */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --apix-page-bg: #05060f;
+  --apix-text: #e2e8f0;
+  --apix-heading: #ffffff;
+  --apix-muted: #94a3b8;
+  --apix-faint: #64748b;
+
+  /* Aurora nebulae (start/end pairs for the cross-fade drift) */
+  --aurora-a: rgba(99, 102, 241, 0.32);
+  --aurora-b: rgba(34, 211, 238, 0.20);
+  --aurora-c: rgba(168, 85, 247, 0.18);
+  --aurora-d: rgba(16, 185, 129, 0.12);
+
+  /* Glass + lattice */
+  --glass-top: rgba(255, 255, 255, 0.045);
+  --glass-bg: rgba(30, 41, 59, 0.62);
+  --glass-bg2: rgba(10, 15, 30, 0.72);
+  --glass-border: rgba(148, 163, 184, 0.16);
+  --glass-shadow: rgba(2, 6, 23, 0.9);
+  --glass-ring: rgba(56, 189, 248, 0.03);
+  --lattice-line: rgba(148, 163, 184, 0.055);
+  --lattice-star: rgba(226, 232, 240, 0.16);
+  --lattice-opacity: 1;
+
+  /* Palette-reactive accents consumed by .accent-glow-* utilities */
+  --accent-primary: #818cf8;
+  --accent-primary-soft: rgba(129, 140, 248, 0.22);
+  --accent-positive: #34d399;
+  --accent-positive-soft: rgba(52, 211, 153, 0.22);
+  --accent-negative: #fb923c;
+  --accent-negative-soft: rgba(251, 146, 60, 0.22);
+  --accent-tertiary: #e879f9;
+  --accent-tertiary-soft: rgba(232, 121, 249, 0.2);
+
+  --scroll-track: #05060f;
+  --scroll-thumb: #232d4e;
+  --scroll-thumb-hover: #34406b;
+}
+
+/* ------------------------------ LIGHT THEME ------------------------------ */
+html[data-theme="light"] {
+  color-scheme: light;
+  --apix-page-bg: #eef2fb;
+  --apix-text: #1e2a44;
+  --apix-heading: #0b1530;
+  --apix-muted: #46557a;
+  --apix-faint: #6b7aa4;
+
+  --aurora-a: rgba(99, 102, 241, 0.20);
+  --aurora-b: rgba(14, 165, 233, 0.16);
+  --aurora-c: rgba(192, 132, 252, 0.16);
+  --aurora-d: rgba(52, 211, 153, 0.12);
+
+  --glass-top: rgba(255, 255, 255, 0.65);
+  --glass-bg: rgba(255, 255, 255, 0.78);
+  --glass-bg2: rgba(241, 245, 255, 0.86);
+  --glass-border: rgba(100, 116, 139, 0.22);
+  --glass-shadow: rgba(15, 23, 42, 0.12);
+  --glass-ring: rgba(99, 102, 241, 0.06);
+  --lattice-line: rgba(71, 85, 105, 0.08);
+  --lattice-star: rgba(99, 102, 241, 0.12);
+  --lattice-opacity: 0.7;
+
+  --accent-primary: #4f46e5;
+  --accent-primary-soft: rgba(79, 70, 229, 0.14);
+  --accent-positive: #059669;
+  --accent-positive-soft: rgba(5, 150, 105, 0.14);
+  --accent-negative: #ea580c;
+  --accent-negative-soft: rgba(234, 88, 12, 0.14);
+  --accent-tertiary: #c026d3;
+  --accent-tertiary-soft: rgba(192, 38, 211, 0.12);
+
+  --scroll-track: #eef2fb;
+  --scroll-thumb: #c3cbe4;
+  --scroll-thumb-hover: #9aa7cc;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--apix-page-bg);
+  color: var(--apix-text);
+  font-family: var(--font-display);
+  transition: background-color 0.5s ease, color 0.5s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   Ambient backdrop — five composited layers:
+     1. base vertical wash
+     2. two cross-fading drifting nebula blobs (palette-reactive via vars)
+     3. data-grid lattice + star-grain, masked toward the fold
+   Parallax: --parallax-y (0..1 page-progress) is set by App and offsets the
+   nebula layer at a different rate than the content scroll.
+   ========================================================================== */
+.aurora-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 55% at 50% -20%, var(--accent-primary-soft), transparent 60%),
+    linear-gradient(180deg, color-mix(in srgb, var(--apix-page-bg) 86%, #4338ca 14%) 0%, var(--apix-page-bg) 55%, color-mix(in srgb, var(--apix-page-bg) 92%, #0ea5e9 8%) 100%);
+  transition: background 0.5s ease;
+}
+
+/* Layer 2 — the drifting nebulae (parallax-offset, palette-driven) */
+.aurora-backdrop::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(38rem 26rem at 22% 18%, var(--aurora-a), transparent 62%),
+    radial-gradient(32rem 22rem at 82% 8%, var(--aurora-b), transparent 60%),
+    radial-gradient(30rem 24rem at 68% 78%, var(--aurora-c), transparent 62%),
+    radial-gradient(26rem 20rem at 12% 82%, var(--aurora-d), transparent 60%);
+  filter: blur(80px) saturate(135%);
+  transform: translate3d(0, calc(var(--parallax-y, 0) * -9%), 0);
+  animation: aurora-crossfade 18s ease-in-out infinite alternate;
+  will-change: transform, opacity, background-position;
+  transition: background 0.5s ease;
+}
+
+/* ==========================================================================
+   Aurora intro flare — a one-shot bloom that erupts from the horizon on page
+   load and dissolves into the ambient field. Runs exactly once (animation
+   fill-mode forwards holds the invisible end state; the element is inert and
+   pointer-transparent thereafter). Skipped under prefers-reduced-motion.
+   ========================================================================== */
+.aurora-flare {
+  position: fixed;
+  inset: 0;
+  z-index: -9;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(
+      52vmax 34vmax at 50% 62%,
+      color-mix(in srgb, var(--accent-primary) 55%, transparent),
+      color-mix(in srgb, var(--accent-tertiary) 26%, transparent) 42%,
+      transparent 72%
+    ),
+    radial-gradient(
+      30vmax 20vmax at 50% 58%,
+      color-mix(in srgb, var(--accent-positive) 42%, transparent),
+      transparent 65%
+    );
+  filter: blur(30px) saturate(160%);
+  transform-origin: 50% 62%;
+  animation: aurora-flare 1.9s cubic-bezier(0.19, 1, 0.22, 1) 0.15s both;
+}
+
+@keyframes aurora-flare {
+  0% {
+    opacity: 0;
+    transform: scale(0.18) translateY(9vh);
+  }
+  28% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.55) translateY(-13vh);
+  }
+}
+
+/* Slow breathing opacity so the nebulae feel alive even when idle */
+@keyframes aurora-crossfade {
+  0% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.88;
+  }
+}
+
+/* ==========================================================================
+   Cloud drift — flowing clouds in the sky layer.
+   Three fixed strata painted with radial-gradient blobs (no images). Motion
+   is transform-only on 90–210s loops → fully compositor-side, effectively
+   zero main-thread cost. Layers also ride the existing --parallax-y scroll
+   variable for depth against the aurora.
+   ========================================================================== */
+.cloud-drift {
+  position: fixed;
+  inset: 0;
+  z-index: -8; /* above aurora (-10/-9), below all content (0+) */
+  overflow: hidden;
+  pointer-events: none;
+}
+.cloud-layer {
+  position: absolute;
+  inset: -12% -30%; /* oversized so the loop never shows an edge */
+  will-change: transform;
+}
+/* Soft cumulus field: overlapping elliptical blobs, denser near the top */
+.cloud-layer-far {
+  background-image:
+    radial-gradient(38rem 9rem at 12% 22%, var(--cloud), transparent 70%),
+    radial-gradient(30rem 7.5rem at 48% 12%, var(--cloud), transparent 70%),
+    radial-gradient(44rem 10rem at 82% 26%, var(--cloud), transparent 72%),
+    radial-gradient(26rem 6.5rem at 66% 40%, var(--cloud-faint), transparent 70%),
+    radial-gradient(34rem 8rem at 28% 46%, var(--cloud-faint), transparent 70%);
+  animation: cloud-drift-a 210s linear infinite;
+  transform: translate3d(0, calc(var(--parallax-y, 0) * 14px), 0);
+}
+.cloud-layer-mid {
+  background-image:
+    radial-gradient(30rem 8rem at 8% 62%, var(--cloud), transparent 70%),
+    radial-gradient(40rem 9rem at 42% 74%, var(--cloud-faint), transparent 72%),
+    radial-gradient(28rem 7rem at 74% 58%, var(--cloud), transparent 70%),
+    radial-gradient(36rem 8.5rem at 92% 78%, var(--cloud-faint), transparent 72%);
+  animation: cloud-drift-b 150s linear infinite;
+  transform: translate3d(0, calc(var(--parallax-y, 0) * 26px), 0);
+}
+/* Fastest, faintest, moving against the wind → shear depth cue */
+.cloud-layer-near {
+  background-image:
+    radial-gradient(24rem 5.5rem at 18% 86%, var(--cloud-faint), transparent 72%),
+    radial-gradient(30rem 6.5rem at 58% 92%, var(--cloud-faint), transparent 72%),
+    radial-gradient(20rem 5rem at 86% 84%, var(--cloud-faint), transparent 72%);
+  animation: cloud-drift-a 90s linear infinite reverse;
+  opacity: 0.8;
+}
+@keyframes cloud-drift-a {
+  from {
+    transform: translate3d(-4%, calc(var(--parallax-y, 0) * 14px), 0);
+  }
+  to {
+    transform: translate3d(4%, calc(var(--parallax-y, 0) * 14px), 0);
+  }
+}
+@keyframes cloud-drift-b {
+  from {
+    transform: translate3d(3.5%, calc(var(--parallax-y, 0) * 26px), 0);
+  }
+  to {
+    transform: translate3d(-3.5%, calc(var(--parallax-y, 0) * 26px), 0);
+  }
+}
+/* Dark theme: luminous night clouds catching the aurora */
+html[data-theme="dark"] {
+  --cloud: rgba(148, 163, 184, 0.10);
+  --cloud-faint: rgba(148, 163, 184, 0.055);
+}
+/* Light theme: soft daylight stratus over the paper backdrop */
+html[data-theme="light"] {
+  --cloud: rgba(255, 255, 255, 0.5);
+  --cloud-faint: rgba(255, 255, 255, 0.32);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cloud-layer {
+    animation: none;
+  }
+}
+
+/* Layers 3 + 4 — lattice grid and star-grain, both masked toward the fold */
+.aurora-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--lattice-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--lattice-line) 1px, transparent 1px),
+    radial-gradient(var(--lattice-star) 1px, transparent 1.4px);
+  background-size:
+    72px 72px,
+    72px 72px,
+    220px 180px;
+  background-position:
+    0 calc(var(--parallax-y, 0) * 60px),
+    0 calc(var(--parallax-y, 0) * 60px),
+    40px calc(60px + var(--parallax-y, 0) * 90px);
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 34%, transparent 78%);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 34%, transparent 78%);
+  opacity: calc(0.75 * var(--lattice-opacity, 1));
+  animation: aurora-breathe 12s ease-in-out infinite;
+}
+
+@keyframes aurora-breathe {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.25);
+  }
+}
+
+/* ==========================================================================
+   Palette-reactive glow utilities (drive from --accent-* variables)
+   ========================================================================== */
+.accent-text {
+  color: var(--accent-primary);
+}
+.accent-border {
+  border-color: color-mix(in srgb, var(--accent-primary) 45%, transparent);
+}
+.accent-glow-card {
+  position: relative;
+}
+.accent-glow-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    140deg,
+    color-mix(in srgb, var(--accent-primary) 55%, transparent),
+    transparent 38%,
+    transparent 62%,
+    color-mix(in srgb, var(--accent-tertiary) 40%, transparent)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.accent-glow-card:hover::after {
+  opacity: 1;
+}
+.accent-sheen {
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    var(--accent-primary-soft) 50%,
+    transparent 70%
+  );
+}
+
+/* ------------------------------- Glass panel ----------------------------- */
+.glass-panel {
+  background:
+    linear-gradient(180deg, var(--glass-top), rgba(255, 255, 255, 0) 34%),
+    linear-gradient(150deg, var(--glass-bg), var(--glass-bg2));
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.08) inset,
+    0 0 0 1px var(--glass-ring),
+    0 24px 56px -28px var(--glass-shadow);
+  transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Subtle animated sheen for the primary status dot */
+@keyframes apix-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+.animate-apix-pulse {
+  animation: apix-pulse 2.4s ease-in-out infinite;
+}
+
+/* Thin, elegant scrollbar matching the active theme */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scroll-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+  border-radius: 8px;
+  border: 2px solid var(--scroll-track);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scroll-thumb-hover);
+}
+
+/* ==========================================================================
+   Light-mode text remapping.
+   Components were authored against the dark aurora; inside glass panels the
+   common slate/white text utilities flip to the navy ink scale. Buttons and
+   links keep their white-on-gradient text, and .keep-dark containers
+   (terminal, chat bubbles, code blocks) opt out entirely.
+   ========================================================================== */
+html[data-theme="light"] .glass-panel .text-white:not(button *):not(a *):not(svg *):not(.keep-dark):not(.keep-dark *) {
+  color: var(--apix-heading);
+}
+html[data-theme="light"] .glass-panel .text-slate-200:not(button *):not(a *):not(.keep-dark):not(.keep-dark *) {
+  color: #33415c;
+}
+html[data-theme="light"] .glass-panel .text-slate-300:not(button *):not(a *):not(.keep-dark):not(.keep-dark *) {
+  color: #46557a;
+}
+/* Opt-out surfaces (.keep-dark) keep the dark palette verbatim — no restore
+   rules needed since the remaps above exclude their subtrees. */
+
+/* Motion accessibility — freeze ambient animation for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-backdrop::before,
+  .aurora-backdrop::after,
+  .aurora-flare {
+    animation: none;
+  }
+  .aurora-flare {
+    opacity: 0;
+  }
+  .cloud-layer {
+    animation: none;
+  }
+  .cloud-layer-far {
+    transform: translate3d(0, calc(var(--parallax-y, 0) * 14px), 0);
+  }
+  .cloud-layer-mid {
+    transform: translate3d(0, calc(var(--parallax-y, 0) * 26px), 0);
+  }
+  .cloud-layer-near {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* ==========================================================================
+   Light-mode polish for widget sub-surfaces the generic text remap cannot
+   reach: filled slate chips/bars that are invisible against white glass.
+   The keep-dark rule above must stay FIRST so .keep-dark subtrees win.
+   ========================================================================== */
+html[data-theme="light"] .glass-panel .bg-slate-900\/60:not(.keep-dark):not(.keep-dark *),
+html[data-theme="light"] .glass-panel .bg-slate-900\/70:not(.keep-dark):not(.keep-dark *) {
+  background-color: rgba(255, 255, 255, 0.72);
+}
+html[data-theme="light"] .glass-panel .bg-slate-900\/80:not(.keep-dark):not(.keep-dark *),
+html[data-theme="light"] .glass-panel .bg-slate-950\/60:not(.keep-dark):not(.keep-dark *),
+html[data-theme="light"] .glass-panel .bg-slate-950\/80:not(.keep-dark):not(.keep-dark *) {
+  background-color: rgba(238, 242, 251, 0.92);
+}
+html[data-theme="light"] .glass-panel .border-slate-700\/50:not(.keep-dark):not(.keep-dark *),
+html[data-theme="light"] .glass-panel .border-slate-700\/60:not(.keep-dark):not(.keep-dark *),
+html[data-theme="light"] .glass-panel .border-slate-700\/70:not(.keep-dark):not(.keep-dark *),
+html[data-theme="light"] .glass-panel .border-slate-700\/80:not(.keep-dark):not(.keep-dark *) {
+  border-color: rgba(100, 116, 139, 0.28);
+}
+html[data-theme="light"] .glass-panel .bg-slate-800\/40:not(.keep-dark):not(.keep-dark *),
+html[data-theme="light"] .glass-panel .bg-slate-800\/70:not(.keep-dark):not(.keep-dark *),
+html[data-theme="light"] .glass-panel .bg-slate-800\/80:not(.keep-dark):not(.keep-dark *),
+html[data-theme="light"] .glass-panel .bg-slate-900\/40:not(.keep-dark):not(.keep-dark *),
+html[data-theme="light"] .glass-panel .bg-slate-800:not(.keep-dark):not(.keep-dark *) {
+  background-color: rgba(71, 85, 105, 0.1);
+}
+html[data-theme="light"] .glass-panel .border-slate-800\/60:not(.keep-dark):not(.keep-dark *),
+html[data-theme="light"] .glass-panel .border-slate-800\/70:not(.keep-dark):not(.keep-dark *),
+html[data-theme="light"] .glass-panel .border-slate-800\/80:not(.keep-dark):not(.keep-dark *) {
+  border-color: rgba(100, 116, 139, 0.2);
+}
+html[data-theme="light"] .glass-panel .placeholder\:text-slate-500::placeholder {
+  color: #7c8bb4;
+}
+html[data-theme="light"] .glass-panel .text-slate-400:not(.keep-dark):not(.keep-dark *) {
+  color: #5b6b93;
+}
+html[data-theme="light"] .glass-panel .bg-slate-800:not(.keep-dark):not(.keep-dark *):not(td *) {
+  background-color: rgba(71, 85, 105, 0.1);
+}
+html[data-theme="light"] .glass-panel td .bg-slate-800 {
+  background-color: rgba(71, 85, 105, 0.16);
+}
+/* Donut slice separators follow the theme's glass depth */
+html[data-theme="light"] {
+  --donut-stroke: rgba(255, 255, 255, 0.95);
+}
+
+/* ==========================================================================
+   FAIR FLIGHT brand mark — hover shimmer + hue drift.
+   The wrapper clips a skewed light band that sweeps across the AeroTrend
+   tile on hover, while the blue→cyan gradient drifts toward indigo/violet
+   via a gentle hue-rotate (so the logo reacts without leaving the palette
+   family). Works in both themes — the effect rides on the SVG's own colors.
+   ========================================================================== */
+.logo-shimmer {
+  position: relative;
+  display: block;
+  border-radius: 12px; /* matches rx=8 of the 32-unit tile at 48px render */
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    filter 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: filter, transform;
+}
+/* Sheen band — parked off-tile until hover */
+.logo-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    105deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 58%
+  );
+  transform: translateX(-130%) skewX(-14deg);
+  pointer-events: none;
+  mix-blend-mode: screen; /* lightens the gradient tile, never muddies it */
+}
+.logo-shimmer:hover {
+  filter: hue-rotate(45deg) saturate(1.18) drop-shadow(0 0 14px rgba(56, 189, 248, 0.5));
+  transform: translateY(-1px);
+}
+.logo-shimmer:hover::after {
+  animation: logo-sheen 0.9s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+@keyframes logo-sheen {
+  to {
+    transform: translateX(130%) skewX(-14deg);
+  }
+}
+/* Re-hover re-runs the sweep: dropping :hover resets the animation, since the
+   forwards fill only lives while the hover rule applies. */
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-shimmer,
+  .logo-shimmer::after {
+    transition: none;
+  }
+  .logo-shimmer:hover {
+    filter: none;
+    transform: none;
+  }
+  .logo-shimmer:hover::after {
+    animation: none;
+  }
+}

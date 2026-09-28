@@ -1,0 +1,19 @@
+# APIx backend — National Airfare Price Index for India (MoSPI/RBI POC)
+# Python 3.11+ recommended. Install with:
+#   pip install -r backend/requirements.txt && python -m playwright install chromium
+
+# --- Web scraping -----------------------------------------------------------
+playwright>=1.44.0          # async headless-Chromium collection (EaseMyTrip et al.)
+
+# --- Data engineering -------------------------------------------------------
+pandas>=2.2.0               # cleaning, resampling, master dataset assembly
+numpy>=1.26.0               # deterministic synthetic fallbacks & history synthesis
+
+# --- API layer --------------------------------------------------------------
+fastapi>=0.111.0            # institutional REST surface (e-Sankhyiki style)
+uvicorn>=0.30.0             # ASGI server for local + containerized deploys
+
+# --- Testing ---------------------------------------------------------------
+pytest>=8.2.0               # pipeline/index regression tests
+pytest-asyncio>=0.23.6      # async collector smoke tests
+httpx>=0.27.0               # FastAPI TestClient transport for endpoint tests

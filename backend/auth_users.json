@@ -1,0 +1,16 @@
+{
+  "analyst@mospi.gov.in": {
+    "email": "analyst@mospi.gov.in",
+    "organisation": "MoSPI (demo)",
+    "tier": "institutional",
+    "passwordHash": "pbkdf2_sha256$200000$dc4bcfa5b0b6783576a45289e368b4d5$d28e0f1a9c6b1dfe89e1be0a3728c862b981cbcd63449580e64c4fd2219ecb4a",
+    "createdAt": "2026-09-13T10:25:50+0530"
+  },
+  "judge@example.com": {
+    "email": "judge@example.com",
+    "organisation": "Judges",
+    "tier": "public",
+    "passwordHash": "pbkdf2_sha256$200000$dd1bb9549c6a61112c9183ff9394987c$781b760478862f31be6f3efff6ab7aa565d52829eff43c4575dc2aca6c8f591e",
+    "createdAt": "2026-09-13T10:25:50+0530"
+  }
+}

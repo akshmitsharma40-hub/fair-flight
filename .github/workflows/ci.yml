@@ -1,0 +1,61 @@
+name: CI
+
+# Quality gate for FAIR FLIGHT — runs on every push/PR:
+#   * frontend typecheck + production build (catches TS/regressions)
+#   * backend import smoke + full pipeline reproduction from artifacts
+#     (catches engine/API breakage before the daily publication job can)
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: Frontend — typecheck & build
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package.json
+      - name: Install dependencies
+        run: npm install
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Production build
+        run: npm run build
+
+  backend:
+    name: Backend — imports & pipeline reproduction
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Import smoke (every engine + the API app)
+        run: |
+          python -c "import scraper, pipeline, index_engine, forecast_engine, analytics_engine, pdf_bulletin, logo_mark, auth; print('engines ok')"
+          python -c "import api; print('api app ok')"
+      - name: Reproduce index from committed artifacts
+        run: python index_engine.py
+      - name: Forecast smoke (national scope)
+        run: python forecast_engine.py --scope NATIONAL --horizon 7

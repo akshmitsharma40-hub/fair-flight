@@ -1,0 +1,49 @@
+# --- tooling / workspace ---
+.freebuff/
+.grok/
+.tanstack/
+.vercel/
+.project_id
+.node_modules.lock
+.pytest_cache/
+__pycache__/
+*.pyc
+.DS_Store
+
+# --- second project in this workspace (not part of FAIR FLIGHT) ---
+weighflow/
+DECISIONS.weighflow.md
+
+# --- older root-level iteration of the app ---
+/api.py
+/app.py
+/pipeline.py
+/scraper.py
+/index_engine.py
+/forecast_engine.py
+/requirements.txt
+/daily_index.csv
+/data_master.csv
+/data_scraped_raw.csv
+/migrations/
+/artifacts/
+/public/
+/scripts/
+/screenshots/
+/server/
+/src/
+/tsconfig.json
+/vite.config.ts
+/eslint.config.mjs
+/package.json
+/package-lock.json
+/startup.sh
+/verify-checkpoint.mjs
+/AGENTS.md
+/test_pipeline.py
+
+# --- builds & deps ---
+node_modules/
+frontend/dist/
+*.log
+*.log.err

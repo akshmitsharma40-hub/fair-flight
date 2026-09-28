@@ -1,0 +1,70 @@
+{
+  "scope": "NATIONAL",
+  "model": {
+    "family": "ARIMA",
+    "order": {
+      "p": 0,
+      "d": 1,
+      "q": 1
+    },
+    "aic": 80.732,
+    "nObs": 29,
+    "estimator": "hannan-rissanen",
+    "selection": "aic-grid p<=3, q<=2"
+  },
+  "anchorDate": "2026-09-11",
+  "anchorApix": 102.16,
+  "horizon": 7,
+  "predictions": [
+    {
+      "date": "2026-09-12",
+      "point": 106.21,
+      "lower95": 94.03,
+      "upper95": 118.39
+    },
+    {
+      "date": "2026-09-13",
+      "point": 106.24,
+      "lower95": 86.44,
+      "upper95": 126.04
+    },
+    {
+      "date": "2026-09-14",
+      "point": 106.28,
+      "lower95": 81.06,
+      "upper95": 131.49
+    },
+    {
+      "date": "2026-09-15",
+      "point": 106.31,
+      "lower95": 76.65,
+      "upper95": 135.96
+    },
+    {
+      "date": "2026-09-16",
+      "point": 106.34,
+      "lower95": 72.83,
+      "upper95": 139.85
+    },
+    {
+      "date": "2026-09-17",
+      "point": 106.37,
+      "lower95": 69.4,
+      "upper95": 143.34
+    },
+    {
+      "date": "2026-09-18",
+      "point": 106.4,
+      "lower95": 66.28,
+      "upper95": 146.53
+    }
+  ],
+  "coicop": {
+    "division": "07",
+    "divisionName": "Transport",
+    "subClass": "07.3.1.2",
+    "subClassName": "Passenger transport by air",
+    "framework": "COICOP-2018",
+    "baseYear": "2024"
+  }
+}
