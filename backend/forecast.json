@@ -1,70 +1,422 @@
 {
-  "scope": "NATIONAL",
-  "model": {
-    "family": "ARIMA",
-    "order": {
-      "p": 0,
-      "d": 1,
-      "q": 1
+  "NATIONAL": {
+    "scope": "NATIONAL",
+    "model": {
+      "family": "ARIMA",
+      "order": {
+        "p": 1,
+        "d": 1,
+        "q": 1
+      },
+      "aic": 75.507,
+      "nObs": 29,
+      "estimator": "hannan-rissanen",
+      "selection": "aic-grid p<=3, q<=2"
     },
-    "aic": 80.732,
-    "nObs": 29,
-    "estimator": "hannan-rissanen",
-    "selection": "aic-grid p<=3, q<=2"
-  },
-  "anchorDate": "2026-09-11",
-  "anchorApix": 102.16,
-  "horizon": 7,
-  "predictions": [
-    {
-      "date": "2026-09-12",
-      "point": 106.21,
-      "lower95": 94.03,
-      "upper95": 118.39
-    },
-    {
-      "date": "2026-09-13",
-      "point": 106.24,
-      "lower95": 86.44,
-      "upper95": 126.04
-    },
-    {
-      "date": "2026-09-14",
-      "point": 106.28,
-      "lower95": 81.06,
-      "upper95": 131.49
-    },
-    {
-      "date": "2026-09-15",
-      "point": 106.31,
-      "lower95": 76.65,
-      "upper95": 135.96
-    },
-    {
-      "date": "2026-09-16",
-      "point": 106.34,
-      "lower95": 72.83,
-      "upper95": 139.85
-    },
-    {
-      "date": "2026-09-17",
-      "point": 106.37,
-      "lower95": 69.4,
-      "upper95": 143.34
-    },
-    {
-      "date": "2026-09-18",
-      "point": 106.4,
-      "lower95": 66.28,
-      "upper95": 146.53
+    "anchorDate": "2026-09-29",
+    "anchorApix": 102.16,
+    "horizon": 7,
+    "predictions": [
+      {
+        "date": "2026-09-30",
+        "point": 111.4,
+        "lower95": 101.15,
+        "upper95": 121.66
+      },
+      {
+        "date": "2026-10-01",
+        "point": 111.33,
+        "lower95": 93.79,
+        "upper95": 128.86
+      },
+      {
+        "date": "2026-10-02",
+        "point": 111.77,
+        "lower95": 89.19,
+        "upper95": 134.36
+      },
+      {
+        "date": "2026-10-03",
+        "point": 112.19,
+        "lower95": 85.49,
+        "upper95": 138.89
+      },
+      {
+        "date": "2026-10-04",
+        "point": 112.61,
+        "lower95": 82.35,
+        "upper95": 142.86
+      },
+      {
+        "date": "2026-10-05",
+        "point": 113.03,
+        "lower95": 79.59,
+        "upper95": 146.46
+      },
+      {
+        "date": "2026-10-06",
+        "point": 113.44,
+        "lower95": 77.1,
+        "upper95": 149.78
+      }
+    ],
+    "coicop": {
+      "division": "07",
+      "divisionName": "Transport",
+      "subClass": "07.3.1.2",
+      "subClassName": "Passenger transport by air",
+      "framework": "COICOP-2018",
+      "baseYear": "2024"
     }
-  ],
-  "coicop": {
-    "division": "07",
-    "divisionName": "Transport",
-    "subClass": "07.3.1.2",
-    "subClassName": "Passenger transport by air",
-    "framework": "COICOP-2018",
-    "baseYear": "2024"
+  },
+  "DEL-BOM": {
+    "scope": "DEL-BOM",
+    "model": {
+      "family": "ARIMA",
+      "order": {
+        "p": 1,
+        "d": 1,
+        "q": 0
+      },
+      "aic": 83.199,
+      "nObs": 29,
+      "estimator": "hannan-rissanen",
+      "selection": "aic-grid p<=3, q<=2"
+    },
+    "anchorDate": "2026-09-29",
+    "anchorApix": 104.09823484267078,
+    "horizon": 7,
+    "predictions": [
+      {
+        "date": "2026-09-30",
+        "point": 105.22,
+        "lower95": 92.3,
+        "upper95": 118.13
+      },
+      {
+        "date": "2026-10-01",
+        "point": 105.06,
+        "lower95": 86.41,
+        "upper95": 123.71
+      },
+      {
+        "date": "2026-10-02",
+        "point": 105.27,
+        "lower95": 82.25,
+        "upper95": 128.29
+      },
+      {
+        "date": "2026-10-03",
+        "point": 105.38,
+        "lower95": 78.7,
+        "upper95": 132.06
+      },
+      {
+        "date": "2026-10-04",
+        "point": 105.51,
+        "lower95": 75.61,
+        "upper95": 135.41
+      },
+      {
+        "date": "2026-10-05",
+        "point": 105.64,
+        "lower95": 72.84,
+        "upper95": 138.44
+      },
+      {
+        "date": "2026-10-06",
+        "point": 105.77,
+        "lower95": 70.3,
+        "upper95": 141.24
+      }
+    ],
+    "coicop": {
+      "division": "07",
+      "divisionName": "Transport",
+      "subClass": "07.3.1.2",
+      "subClassName": "Passenger transport by air",
+      "framework": "COICOP-2018",
+      "baseYear": "2024"
+    }
+  },
+  "DEL-BLR": {
+    "scope": "DEL-BLR",
+    "model": {
+      "family": "ARIMA",
+      "order": {
+        "p": 0,
+        "d": 1,
+        "q": 2
+      },
+      "aic": 82.461,
+      "nObs": 29,
+      "estimator": "hannan-rissanen",
+      "selection": "aic-grid p<=3, q<=2"
+    },
+    "anchorDate": "2026-09-29",
+    "anchorApix": 101.0237659963437,
+    "horizon": 7,
+    "predictions": [
+      {
+        "date": "2026-09-30",
+        "point": 106.04,
+        "lower95": 92.78,
+        "upper95": 119.29
+      },
+      {
+        "date": "2026-10-01",
+        "point": 105.08,
+        "lower95": 84.17,
+        "upper95": 125.98
+      },
+      {
+        "date": "2026-10-02",
+        "point": 105.17,
+        "lower95": 78.69,
+        "upper95": 131.65
+      },
+      {
+        "date": "2026-10-03",
+        "point": 105.27,
+        "lower95": 74.2,
+        "upper95": 136.34
+      },
+      {
+        "date": "2026-10-04",
+        "point": 105.36,
+        "lower95": 70.3,
+        "upper95": 140.43
+      },
+      {
+        "date": "2026-10-05",
+        "point": 105.46,
+        "lower95": 66.81,
+        "upper95": 144.1
+      },
+      {
+        "date": "2026-10-06",
+        "point": 105.55,
+        "lower95": 63.63,
+        "upper95": 147.48
+      }
+    ],
+    "coicop": {
+      "division": "07",
+      "divisionName": "Transport",
+      "subClass": "07.3.1.2",
+      "subClassName": "Passenger transport by air",
+      "framework": "COICOP-2018",
+      "baseYear": "2024"
+    }
+  },
+  "BOM-BLR": {
+    "scope": "BOM-BLR",
+    "model": {
+      "family": "ARIMA",
+      "order": {
+        "p": 1,
+        "d": 1,
+        "q": 0
+      },
+      "aic": 92.968,
+      "nObs": 29,
+      "estimator": "hannan-rissanen",
+      "selection": "aic-grid p<=3, q<=2"
+    },
+    "anchorDate": "2026-09-29",
+    "anchorApix": 99.91757335970985,
+    "horizon": 7,
+    "predictions": [
+      {
+        "date": "2026-09-30",
+        "point": 105.15,
+        "lower95": 88.85,
+        "upper95": 121.45
+      },
+      {
+        "date": "2026-10-01",
+        "point": 102.41,
+        "lower95": 77.78,
+        "upper95": 127.04
+      },
+      {
+        "date": "2026-10-02",
+        "point": 103.91,
+        "lower95": 72.79,
+        "upper95": 135.04
+      },
+      {
+        "date": "2026-10-03",
+        "point": 103.16,
+        "lower95": 66.59,
+        "upper95": 139.72
+      },
+      {
+        "date": "2026-10-04",
+        "point": 103.6,
+        "lower95": 62.29,
+        "upper95": 144.92
+      },
+      {
+        "date": "2026-10-05",
+        "point": 103.41,
+        "lower95": 57.83,
+        "upper95": 148.99
+      },
+      {
+        "date": "2026-10-06",
+        "point": 103.56,
+        "lower95": 54.08,
+        "upper95": 153.03
+      }
+    ],
+    "coicop": {
+      "division": "07",
+      "divisionName": "Transport",
+      "subClass": "07.3.1.2",
+      "subClassName": "Passenger transport by air",
+      "framework": "COICOP-2018",
+      "baseYear": "2024"
+    }
+  },
+  "BLR-HYD": {
+    "scope": "BLR-HYD",
+    "model": {
+      "family": "ARIMA",
+      "order": {
+        "p": 2,
+        "d": 1,
+        "q": 0
+      },
+      "aic": 96.49,
+      "nObs": 29,
+      "estimator": "hannan-rissanen",
+      "selection": "aic-grid p<=3, q<=2"
+    },
+    "anchorDate": "2026-09-29",
+    "anchorApix": 108.01988759187203,
+    "horizon": 7,
+    "predictions": [
+      {
+        "date": "2026-09-30",
+        "point": 121.89,
+        "lower95": 104.99,
+        "upper95": 138.79
+      },
+      {
+        "date": "2026-10-01",
+        "point": 118.8,
+        "lower95": 91.3,
+        "upper95": 146.29
+      },
+      {
+        "date": "2026-10-02",
+        "point": 116.88,
+        "lower95": 81.63,
+        "upper95": 152.13
+      },
+      {
+        "date": "2026-10-03",
+        "point": 120.92,
+        "lower95": 79.28,
+        "upper95": 162.57
+      },
+      {
+        "date": "2026-10-04",
+        "point": 119.7,
+        "lower95": 72.39,
+        "upper95": 167.01
+      },
+      {
+        "date": "2026-10-05",
+        "point": 120.28,
+        "lower95": 67.89,
+        "upper95": 172.68
+      },
+      {
+        "date": "2026-10-06",
+        "point": 121.56,
+        "lower95": 64.52,
+        "upper95": 178.59
+      }
+    ],
+    "coicop": {
+      "division": "07",
+      "divisionName": "Transport",
+      "subClass": "07.3.1.2",
+      "subClassName": "Passenger transport by air",
+      "framework": "COICOP-2018",
+      "baseYear": "2024"
+    }
+  },
+  "DEL-CCU": {
+    "scope": "DEL-CCU",
+    "model": {
+      "family": "ARIMA",
+      "order": {
+        "p": 0,
+        "d": 1,
+        "q": 1
+      },
+      "aic": 86.924,
+      "nObs": 29,
+      "estimator": "hannan-rissanen",
+      "selection": "aic-grid p<=3, q<=2"
+    },
+    "anchorDate": "2026-09-29",
+    "anchorApix": 99.19263456090651,
+    "horizon": 7,
+    "predictions": [
+      {
+        "date": "2026-09-30",
+        "point": 108.5,
+        "lower95": 94.39,
+        "upper95": 122.62
+      },
+      {
+        "date": "2026-10-01",
+        "point": 108.74,
+        "lower95": 87.0,
+        "upper95": 130.47
+      },
+      {
+        "date": "2026-10-02",
+        "point": 108.97,
+        "lower95": 81.66,
+        "upper95": 136.28
+      },
+      {
+        "date": "2026-10-03",
+        "point": 109.2,
+        "lower95": 77.28,
+        "upper95": 141.13
+      },
+      {
+        "date": "2026-10-04",
+        "point": 109.44,
+        "lower95": 73.49,
+        "upper95": 145.39
+      },
+      {
+        "date": "2026-10-05",
+        "point": 109.67,
+        "lower95": 70.1,
+        "upper95": 149.24
+      },
+      {
+        "date": "2026-10-06",
+        "point": 109.9,
+        "lower95": 67.02,
+        "upper95": 152.79
+      }
+    ],
+    "coicop": {
+      "division": "07",
+      "divisionName": "Transport",
+      "subClass": "07.3.1.2",
+      "subClassName": "Passenger transport by air",
+      "framework": "COICOP-2018",
+      "baseYear": "2024"
+    }
   }
 }
