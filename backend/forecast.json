@@ -8,56 +8,56 @@
         "d": 1,
         "q": 0
       },
-      "aic": 80.254,
+      "aic": 78.113,
       "nObs": 29,
       "estimator": "hannan-rissanen",
       "selection": "aic-grid p<=3, q<=2"
     },
-    "anchorDate": "2026-10-03",
-    "anchorApix": 92.88,
+    "anchorDate": "2026-10-04",
+    "anchorApix": 96.38,
     "horizon": 7,
     "predictions": [
       {
-        "date": "2026-10-04",
-        "point": 95.44,
-        "lower95": 83.4,
-        "upper95": 107.48
-      },
-      {
         "date": "2026-10-05",
-        "point": 94.84,
-        "lower95": 77.67,
-        "upper95": 112.01
+        "point": 98.94,
+        "lower95": 87.5,
+        "upper95": 110.39
       },
       {
         "date": "2026-10-06",
-        "point": 94.81,
-        "lower95": 73.72,
-        "upper95": 115.9
+        "point": 98.31,
+        "lower95": 81.91,
+        "upper95": 114.71
       },
       {
         "date": "2026-10-07",
-        "point": 94.67,
-        "lower95": 70.28,
-        "upper95": 119.06
+        "point": 98.41,
+        "lower95": 78.23,
+        "upper95": 118.58
       },
       {
         "date": "2026-10-08",
-        "point": 94.56,
-        "lower95": 67.27,
-        "upper95": 121.85
+        "point": 98.34,
+        "lower95": 74.98,
+        "upper95": 121.69
       },
       {
         "date": "2026-10-09",
-        "point": 94.44,
-        "lower95": 64.53,
-        "upper95": 124.35
+        "point": 98.31,
+        "lower95": 72.16,
+        "upper95": 124.45
       },
       {
         "date": "2026-10-10",
-        "point": 94.32,
-        "lower95": 62.0,
-        "upper95": 126.64
+        "point": 98.27,
+        "lower95": 69.6,
+        "upper95": 126.94
+      },
+      {
+        "date": "2026-10-11",
+        "point": 98.23,
+        "lower95": 67.24,
+        "upper95": 129.22
       }
     ],
     "coicop": {
@@ -78,56 +78,56 @@
         "d": 1,
         "q": 0
       },
-      "aic": 81.683,
+      "aic": 77.948,
       "nObs": 29,
       "estimator": "hannan-rissanen",
       "selection": "aic-grid p<=3, q<=2"
     },
-    "anchorDate": "2026-10-03",
-    "anchorApix": 94.66778336125071,
+    "anchorDate": "2026-10-04",
+    "anchorApix": 98.20445988995078,
     "horizon": 7,
     "predictions": [
       {
-        "date": "2026-10-04",
-        "point": 95.53,
-        "lower95": 83.07,
-        "upper95": 107.99
-      },
-      {
         "date": "2026-10-05",
-        "point": 95.24,
-        "lower95": 77.59,
-        "upper95": 112.89
+        "point": 102.23,
+        "lower95": 90.83,
+        "upper95": 113.63
       },
       {
         "date": "2026-10-06",
-        "point": 95.04,
-        "lower95": 73.41,
-        "upper95": 116.68
+        "point": 100.31,
+        "lower95": 83.39,
+        "upper95": 117.23
       },
       {
         "date": "2026-10-07",
-        "point": 94.84,
-        "lower95": 69.85,
-        "upper95": 119.83
+        "point": 101.07,
+        "lower95": 79.9,
+        "upper95": 122.23
       },
       {
         "date": "2026-10-08",
-        "point": 94.64,
-        "lower95": 66.69,
-        "upper95": 122.58
+        "point": 100.62,
+        "lower95": 75.91,
+        "upper95": 125.33
       },
       {
         "date": "2026-10-09",
-        "point": 94.43,
-        "lower95": 63.82,
-        "upper95": 125.05
+        "point": 100.72,
+        "lower95": 72.9,
+        "upper95": 128.53
       },
       {
         "date": "2026-10-10",
-        "point": 94.23,
-        "lower95": 61.16,
-        "upper95": 127.3
+        "point": 100.57,
+        "lower95": 69.97,
+        "upper95": 131.17
+      },
+      {
+        "date": "2026-10-11",
+        "point": 100.53,
+        "lower95": 67.37,
+        "upper95": 133.69
       }
     ],
     "coicop": {
@@ -146,58 +146,58 @@
       "order": {
         "p": 0,
         "d": 1,
-        "q": 2
+        "q": 1
       },
-      "aic": 79.013,
+      "aic": 76.985,
       "nObs": 29,
       "estimator": "hannan-rissanen",
       "selection": "aic-grid p<=3, q<=2"
     },
-    "anchorDate": "2026-10-03",
-    "anchorApix": 91.8448753462604,
+    "anchorDate": "2026-10-04",
+    "anchorApix": 95.3196872125115,
     "horizon": 7,
     "predictions": [
       {
-        "date": "2026-10-04",
-        "point": 93.31,
-        "lower95": 81.14,
-        "upper95": 105.47
-      },
-      {
         "date": "2026-10-05",
-        "point": 96.21,
-        "lower95": 78.36,
-        "upper95": 114.05
+        "point": 105.89,
+        "lower95": 94.75,
+        "upper95": 117.04
       },
       {
         "date": "2026-10-06",
-        "point": 96.12,
-        "lower95": 73.56,
-        "upper95": 118.68
+        "point": 106.27,
+        "lower95": 87.38,
+        "upper95": 125.15
       },
       {
         "date": "2026-10-07",
-        "point": 96.04,
-        "lower95": 69.6,
-        "upper95": 122.49
+        "point": 106.64,
+        "lower95": 82.37,
+        "upper95": 130.91
       },
       {
         "date": "2026-10-08",
-        "point": 95.96,
-        "lower95": 66.13,
-        "upper95": 125.79
+        "point": 107.01,
+        "lower95": 78.35,
+        "upper95": 135.67
       },
       {
         "date": "2026-10-09",
-        "point": 95.88,
-        "lower95": 63.01,
-        "upper95": 128.74
+        "point": 107.39,
+        "lower95": 74.93,
+        "upper95": 139.85
       },
       {
         "date": "2026-10-10",
-        "point": 95.8,
-        "lower95": 60.15,
-        "upper95": 131.44
+        "point": 107.76,
+        "lower95": 71.9,
+        "upper95": 143.62
+      },
+      {
+        "date": "2026-10-11",
+        "point": 108.13,
+        "lower95": 69.17,
+        "upper95": 147.1
       }
     ],
     "coicop": {
@@ -218,56 +218,56 @@
         "d": 1,
         "q": 0
       },
-      "aic": 96.03,
+      "aic": 97.59,
       "nObs": 29,
       "estimator": "hannan-rissanen",
       "selection": "aic-grid p<=3, q<=2"
     },
-    "anchorDate": "2026-10-03",
-    "anchorApix": 90.84232613908873,
+    "anchorDate": "2026-10-04",
+    "anchorApix": 94.2759371597449,
     "horizon": 7,
     "predictions": [
       {
-        "date": "2026-10-04",
-        "point": 98.22,
-        "lower95": 80.69,
-        "upper95": 115.76
-      },
-      {
         "date": "2026-10-05",
-        "point": 94.86,
-        "lower95": 69.05,
-        "upper95": 120.68
+        "point": 99.22,
+        "lower95": 81.02,
+        "upper95": 117.41
       },
       {
         "date": "2026-10-06",
-        "point": 95.9,
-        "lower95": 63.74,
-        "upper95": 128.05
+        "point": 97.25,
+        "lower95": 70.79,
+        "upper95": 123.72
       },
       {
         "date": "2026-10-07",
-        "point": 95.13,
-        "lower95": 57.67,
-        "upper95": 132.59
+        "point": 97.63,
+        "lower95": 64.86,
+        "upper95": 130.4
       },
       {
         "date": "2026-10-08",
-        "point": 95.1,
-        "lower95": 53.0,
-        "upper95": 137.2
+        "point": 97.21,
+        "lower95": 59.16,
+        "upper95": 135.27
       },
       {
         "date": "2026-10-09",
-        "point": 94.77,
-        "lower95": 48.5,
-        "upper95": 141.05
+        "point": 97.07,
+        "lower95": 54.38,
+        "upper95": 139.75
       },
       {
         "date": "2026-10-10",
-        "point": 94.57,
-        "lower95": 44.46,
-        "upper95": 144.67
+        "point": 96.83,
+        "lower95": 49.97,
+        "upper95": 143.69
+      },
+      {
+        "date": "2026-10-11",
+        "point": 96.62,
+        "lower95": 45.92,
+        "upper95": 147.32
       }
     ],
     "coicop": {
@@ -284,60 +284,60 @@
     "model": {
       "family": "ARIMA",
       "order": {
-        "p": 1,
+        "p": 0,
         "d": 1,
-        "q": 0
+        "q": 1
       },
-      "aic": 100.07,
+      "aic": 93.706,
       "nObs": 29,
       "estimator": "hannan-rissanen",
       "selection": "aic-grid p<=3, q<=2"
     },
-    "anchorDate": "2026-10-03",
-    "anchorApix": 98.19217921006093,
+    "anchorDate": "2026-10-04",
+    "anchorApix": 101.89641109298533,
     "horizon": 7,
     "predictions": [
       {
-        "date": "2026-10-04",
-        "point": 114.89,
-        "lower95": 95.59,
-        "upper95": 134.2
-      },
-      {
         "date": "2026-10-05",
-        "point": 105.12,
-        "lower95": 75.38,
-        "upper95": 134.87
+        "point": 112.02,
+        "lower95": 95.43,
+        "upper95": 128.61
       },
       {
         "date": "2026-10-06",
-        "point": 111.56,
-        "lower95": 73.48,
-        "upper95": 149.63
+        "point": 112.39,
+        "lower95": 85.81,
+        "upper95": 138.98
       },
       {
         "date": "2026-10-07",
-        "point": 108.07,
-        "lower95": 62.98,
-        "upper95": 153.17
+        "point": 112.77,
+        "lower95": 79.03,
+        "upper95": 146.5
       },
       {
         "date": "2026-10-08",
-        "point": 110.66,
-        "lower95": 59.42,
-        "upper95": 161.89
+        "point": 113.14,
+        "lower95": 73.52,
+        "upper95": 152.75
       },
       {
         "date": "2026-10-09",
-        "point": 109.53,
-        "lower95": 52.79,
-        "upper95": 166.27
+        "point": 113.51,
+        "lower95": 68.77,
+        "upper95": 158.24
       },
       {
         "date": "2026-10-10",
-        "point": 110.67,
-        "lower95": 48.91,
-        "upper95": 172.43
+        "point": 113.88,
+        "lower95": 64.56,
+        "upper95": 163.2
+      },
+      {
+        "date": "2026-10-11",
+        "point": 114.25,
+        "lower95": 60.73,
+        "upper95": 167.77
       }
     ],
     "coicop": {
@@ -358,56 +358,56 @@
         "d": 1,
         "q": 1
       },
-      "aic": 86.58,
+      "aic": 89.221,
       "nObs": 29,
       "estimator": "hannan-rissanen",
       "selection": "aic-grid p<=3, q<=2"
     },
-    "anchorDate": "2026-10-03",
-    "anchorApix": 90.16351229560964,
+    "anchorDate": "2026-10-04",
+    "anchorApix": 93.5729556386959,
     "horizon": 7,
     "predictions": [
       {
-        "date": "2026-10-04",
-        "point": 102.88,
-        "lower95": 88.87,
-        "upper95": 116.88
-      },
-      {
         "date": "2026-10-05",
-        "point": 103.25,
-        "lower95": 79.91,
-        "upper95": 126.59
+        "point": 103.93,
+        "lower95": 89.02,
+        "upper95": 118.84
       },
       {
         "date": "2026-10-06",
-        "point": 103.62,
-        "lower95": 73.73,
-        "upper95": 133.52
+        "point": 104.11,
+        "lower95": 80.91,
+        "upper95": 127.31
       },
       {
         "date": "2026-10-07",
-        "point": 104.0,
-        "lower95": 68.75,
-        "upper95": 139.25
+        "point": 104.29,
+        "lower95": 75.06,
+        "upper95": 133.52
       },
       {
         "date": "2026-10-08",
-        "point": 104.37,
-        "lower95": 64.48,
-        "upper95": 144.26
+        "point": 104.47,
+        "lower95": 70.26,
+        "upper95": 138.68
       },
       {
         "date": "2026-10-09",
-        "point": 104.75,
-        "lower95": 60.7,
-        "upper95": 148.79
+        "point": 104.64,
+        "lower95": 66.09,
+        "upper95": 143.2
       },
       {
         "date": "2026-10-10",
-        "point": 105.12,
-        "lower95": 57.28,
-        "upper95": 152.96
+        "point": 104.82,
+        "lower95": 62.37,
+        "upper95": 147.27
+      },
+      {
+        "date": "2026-10-11",
+        "point": 105.0,
+        "lower95": 58.97,
+        "upper95": 151.02
       }
     ],
     "coicop": {
